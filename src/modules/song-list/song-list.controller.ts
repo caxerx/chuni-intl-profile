@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { SongMode } from '@prisma/client';
 import { SongEntryDto } from 'src/dtos/song-list';
 import { SettingService } from 'src/shared/setting.service';
 import { SongModeService } from 'src/shared/song-mode.service';
@@ -19,6 +20,12 @@ export class SongListController {
     private readonly songModeService: SongModeService,
     private readonly settingService: SettingService,
   ) {}
+
+  @Get('/song-lists')
+  async getSongLists() {
+    const resp = await this.songModeService.songModes({});
+    return new SuccessResponse<SongMode[]>(resp);
+  }
 
   @Get('/song-list')
   async getSongList() {
