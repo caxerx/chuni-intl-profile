@@ -1,20 +1,26 @@
-FROM node:16
-
-# Create app directory
-WORKDIR /usr/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY . .
+FROM node:16 as base
 
 RUN npm install -g pnpm
-# If you are building your code for production
-# RUN npm ci --only=production
+
+# BUILDER
+
+FROM base as builder
+
+WORKDIR /usr/src/app
+
+COPY . .
+
 RUN pnpm i
 RUN pnpm build
 
-# Bundle app source
+# BASE
+
+FROM base
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+COPY --from=builder /usr/src/app/dist ./dist
 
 EXPOSE 3000
 

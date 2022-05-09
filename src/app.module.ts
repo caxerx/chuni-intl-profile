@@ -1,23 +1,22 @@
 import { Module } from '@nestjs/common';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PrismaService } from './prisma.service';
-import { RecordService } from './record.service';
+import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AuthModule } from './modules/auth/auth.module';
+import { ChuniRecordModule } from './modules/chuni-record/chuni-record.module';
+import { SettingModule } from './modules/setting/setting.module';
+import { SongListModule } from './modules/song-list/song-list.module';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 150,
-    }),
+    ConfigModule.forRoot(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
+    AuthModule,
+    ChuniRecordModule,
+    SongListModule,
+    SettingModule,
   ],
-  controllers: [AppController],
-  providers: [PrismaService, RecordService, AppService],
 })
 export class AppModule {}

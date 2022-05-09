@@ -15,3 +15,24 @@ model Record {
   createdAt DateTime @default(now())
   record    Json
 }
+
+model SongData {
+  chunirecId String
+  data       Json
+
+  songModeId String
+  SongMode   SongMode @relation(fields: [songModeId], references: [id])
+
+  @@id([chunirecId, songModeId])
+}
+
+model SongMode {
+  id        String     @id @default(cuid())
+  name      String
+  songDatas SongData[]
+}
+
+model Setting {
+  key   String @id
+  value String
+}
