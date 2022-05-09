@@ -3,8 +3,3 @@ export interface JsonDiffResult {
   deleted: unknown;
   updated: unknown;
 }
-
-export interface User {
-  userId: string;
-  username: string;
-}

@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { SongCompareDto, SongImportDto, SongModeDto } from 'src/modules/song-list/song-list.dto';
-import { JsonDiffResult } from 'src/models/types';
+import { JsonDiffResult } from 'src/modules/song-list/song-list-json-diff.type';
 import { SongModeService } from 'src/shared/song-mode.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';

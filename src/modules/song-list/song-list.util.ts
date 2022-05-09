@@ -1,5 +1,5 @@
 import { diff } from 'deep-object-diff';
-import { JsonDiffResult } from 'src/models/types';
+import { JsonDiffResult } from 'src/modules/song-list/song-list-json-diff.type';
 import { isDeepStrictEqual } from 'util';
 import { SongEntryDto } from './song-list.dto';
 
