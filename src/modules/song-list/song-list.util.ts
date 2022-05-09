@@ -1,7 +1,7 @@
 import { diff } from 'deep-object-diff';
 import { JsonDiffResult } from 'src/models/types';
 import { isDeepStrictEqual } from 'util';
-import { SongEntryDto } from '../../dtos/song-list';
+import { SongEntryDto } from './song-list.dto';
 
 export function compareSongList(
   originalSongData: SongEntryDto[],

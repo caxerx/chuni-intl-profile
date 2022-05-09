@@ -4,7 +4,7 @@ import {
   SongCompareDto,
   SongEntryDto,
   SongImportDto,
-} from 'src/dtos/song-list';
+} from 'src/modules/song-list/song-list.dto';
 import { SongDataService } from 'src/shared/song-data.service';
 import { SongModeService } from 'src/shared/song-mode.service';
 import { compareSongList } from './song-list.util';

@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Redirect, UseGuards } from '@nestjs/common';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { Prisma } from '@prisma/client';
-import { RecordSubmitDto } from 'src/dtos/record-submit';
+import { RecordSubmitDto } from 'src/modules/chuni-record/chuni-record-submit.dto';
 import { RecordService } from '../../shared/record.service';
 
 @Controller()

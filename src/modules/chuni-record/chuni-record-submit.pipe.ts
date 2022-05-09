@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { RecordSubmitDto } from 'src/dtos/record-submit';
+import { RecordSubmitDto } from 'src/modules/chuni-record/chuni-record-submit.dto';
 
 @Injectable()
 export class ChuniRecordSubmitPipe implements PipeTransform {

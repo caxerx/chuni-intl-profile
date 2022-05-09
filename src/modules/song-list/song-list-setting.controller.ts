@@ -7,7 +7,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { SongCompareDto, SongImportDto, SongModeDto } from 'src/dtos/song-list';
+import { SongCompareDto, SongImportDto, SongModeDto } from 'src/modules/song-list/song-list.dto';
 import { JsonDiffResult } from 'src/models/types';
 import { SongModeService } from 'src/shared/song-mode.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
