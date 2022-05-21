@@ -16,7 +16,7 @@ export class ChunirecUpdateService {
 
   logger = new Logger(ChunirecUpdateService.name);
 
-  @Cron('40 6 * * *')
+  @Cron('0 14,23 * * *')
   async handleChunirecUpdate() {
     const chunirecSongList = await this.setting.setting({
       key: 'chunirecSongList',
