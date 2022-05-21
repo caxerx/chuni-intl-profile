@@ -31,4 +31,5 @@ ENV PORT=3000
 ENV DATABASE_URL=postgresql://username:password@localhost:5432/dbname?schema=public
 ENV ADMIN_KEY=adminpw
 ENV JWT_SECRET=jwtsecret
+ENV CHUNIREC_TOKEN=chunirec_token
 CMD [ "node", "dist/main" ]
