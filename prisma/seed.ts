@@ -29,7 +29,6 @@ async function main() {
   }
 
   console.log('Create Setting - defaultSongList');
-
   try {
     await prisma.setting.create({
       data: {
@@ -40,6 +39,19 @@ async function main() {
     console.log('Setting - defaultSongList created');
   } catch {
     console.log('Setting - defaultSongList create failed');
+  }
+
+  console.log('Create Setting - chunirecSongList');
+  try {
+    await prisma.setting.create({
+      data: {
+        key: 'chunirecSongList',
+        value: 'cl2y13vrz0000uf2rf2zycg5y',
+      },
+    });
+    console.log('Setting - chunirecSongList created');
+  } catch {
+    console.log('Setting - chunirecSongList create failed');
   }
 }
 

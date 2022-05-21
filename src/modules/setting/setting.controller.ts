@@ -10,8 +10,11 @@ import {
 } from '@nestjs/common';
 import { Setting } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { CreateSettingDto, UpdateSettingDto } from 'src/modules/setting/setting.dto';
-import { SettingService } from 'src/shared/setting.service';
+import {
+  CreateSettingDto,
+  UpdateSettingDto,
+} from '../..//modules/setting/setting.dto';
+import { SettingService } from '../../shared/setting.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 

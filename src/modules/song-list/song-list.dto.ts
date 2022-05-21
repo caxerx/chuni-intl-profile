@@ -5,7 +5,7 @@ import {
   IsNotEmptyObject,
   IsNumber,
   IsString,
-  Matches,
+  IsBoolean,
   ValidateNested,
 } from 'class-validator';
 
@@ -17,15 +17,21 @@ export class SongCompareDto {
 }
 
 export class SongImportDto {
-  @IsString()
-  @Matches(/^c.{24}$/)
-  @IsNotEmpty()
-  modeId!: string;
-
   @ArrayNotEmpty()
   @ValidateNested()
   @Type(() => SongEntryDto)
   songList!: SongEntryDto[];
+}
+
+export class SongUpdateDto {
+  @ArrayNotEmpty()
+  @ValidateNested()
+  @Type(() => SongEntryDto)
+  songList!: SongEntryDto[];
+
+  @IsBoolean()
+  @IsNotEmpty()
+  deleteSong!: boolean;
 }
 
 export class SongMetaDto {

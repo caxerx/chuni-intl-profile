@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { Prisma, SongData } from '@prisma/client';
+import { SongEntryDto } from '../modules/song-list/song-list.dto';
 
 @Injectable()
 export class SongDataService {
@@ -63,5 +64,41 @@ export class SongDataService {
     return this.prisma.songData.delete({
       where,
     });
+  }
+
+  async deleteSongDataBatch(
+    songModeId: string,
+    chunirecIds: string[],
+  ): Promise<number> {
+    const resp = await this.prisma.songData.deleteMany({
+      where: {
+        songModeId: songModeId,
+        chunirecId: {
+          in: chunirecIds,
+        },
+      },
+    });
+    return resp.count;
+  }
+
+  async updateSongDataBatch(songModeId: string, songs: SongEntryDto[]) {
+    const resp = await this.prisma.$transaction(
+      songs.map((i) =>
+        this.prisma.songData.update({
+          where: {
+            chunirecId_songModeId: {
+              chunirecId: i.meta.id,
+              songModeId,
+            },
+          },
+          data: {
+            chunirecId: i.meta.id,
+            songModeId: songModeId,
+            data: i as unknown as Prisma.InputJsonValue,
+          },
+        }),
+      ),
+    );
+    return resp;
   }
 }

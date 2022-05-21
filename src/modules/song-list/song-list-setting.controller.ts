@@ -5,11 +5,18 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
+  Patch,
   UseGuards,
 } from '@nestjs/common';
-import { SongCompareDto, SongImportDto, SongModeDto } from 'src/modules/song-list/song-list.dto';
-import { JsonDiffResult } from 'src/modules/song-list/song-list-json-diff.type';
-import { SongModeService } from 'src/shared/song-mode.service';
+import {
+  SongCompareDto,
+  SongImportDto,
+  SongModeDto,
+  SongUpdateDto,
+} from '../../modules/song-list/song-list.dto';
+import { JsonDiffResult } from '../../modules/song-list/song-list-json-diff.type';
+import { SongModeService } from '../../shared/song-mode.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { SongListService } from './song-list.service';
@@ -28,11 +35,36 @@ export class SongListSettingController {
     return new SuccessResponse<string>(resp.id);
   }
 
-  @Post('/song-list')
-  async createSongData(@Body() importSongDto: SongImportDto) {
+  @Put('/song-list/:id')
+  async createSongData(
+    @Param('id') modeId: string,
+    @Body() importSongDto: SongImportDto,
+  ) {
     try {
-      const resp = await this.songListService.importSongList(importSongDto);
+      const resp = await this.songListService.importSongList(
+        modeId,
+        importSongDto,
+      );
+
       return new SuccessResponse<number>(resp);
+    } catch (e) {
+      if (typeof e === 'string')
+        throw new BadRequestException(new FailureResponse(e, 400));
+      throw e;
+    }
+  }
+
+  @Patch('/song-list/:id')
+  async updateSongData(
+    @Param('id') modeId: string,
+    @Body() importSongDto: SongUpdateDto,
+  ) {
+    try {
+      const resp = await this.songListService.updateSongList(
+        modeId,
+        importSongDto,
+      );
+      return new SuccessResponse<JsonDiffResult>(resp);
     } catch (e) {
       if (typeof e === 'string')
         throw new BadRequestException(new FailureResponse(e, 400));

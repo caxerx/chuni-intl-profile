@@ -1,5 +1,5 @@
 import { diff } from 'deep-object-diff';
-import { JsonDiffResult } from 'src/modules/song-list/song-list-json-diff.type';
+import { JsonDiffResult } from '../../modules/song-list/song-list-json-diff.type';
 import { isDeepStrictEqual } from 'util';
 import { SongEntryDto } from './song-list.dto';
 
@@ -7,10 +7,11 @@ export function compareSongList(
   originalSongData: SongEntryDto[],
   newSongData: SongEntryDto[],
 ) {
-  const diffObj = {
+  const diffObj: JsonDiffResult<SongEntryDto> = {
     added: {},
     deleted: {},
     updated: {},
+    updatedDiff: {},
   };
 
   const originalSongMap = new Map();
@@ -39,10 +40,11 @@ export function compareSongList(
       return (diffObj.deleted[i] = originListSong);
     }
 
-    const diffResp = diff(originListSong, newListSong) as JsonDiffResult;
+    const diffResp = diff(originListSong, newListSong) as Partial<SongEntryDto>;
 
     if (!isDeepStrictEqual(diffResp, {})) {
-      diffObj.updated[i] = diffResp;
+      diffObj.updated[i] = newListSong;
+      diffObj.updatedDiff[i] = diffResp;
     }
   });
 
