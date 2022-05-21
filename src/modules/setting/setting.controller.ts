@@ -14,7 +14,7 @@ import {
   CreateSettingDto,
   UpdateSettingDto,
 } from '../..//modules/setting/setting.dto';
-import { SettingService } from '../../shared/setting.service';
+import { SettingService } from '../prisma/setting.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 

@@ -16,7 +16,7 @@ import {
   SongUpdateDto,
 } from '../../modules/song-list/song-list.dto';
 import { JsonDiffResult } from '../../modules/song-list/song-list-json-diff.type';
-import { SongModeService } from '../../shared/song-mode.service';
+import { SongModeService } from '../prisma/song-mode.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { SongListService } from './song-list.service';

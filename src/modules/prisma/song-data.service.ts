@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { Prisma, SongData } from '@prisma/client';
-import { SongEntryDto } from '../modules/song-list/song-list.dto';
+import { SongEntryDto } from '../song-list/song-list.dto';
 
 @Injectable()
 export class SongDataService {

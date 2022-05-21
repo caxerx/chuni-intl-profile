@@ -8,7 +8,7 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { Record as ChuniRecord } from '@prisma/client';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
-import { RecordService } from '../../shared/record.service';
+import { RecordService } from '../prisma/record.service';
 
 @Controller('/api')
 @UseGuards(ThrottlerGuard)

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { SongListService } from '../song-list/song-list.service';
-import { SettingService } from '../../shared/setting.service';
+import { SettingService } from '../prisma/setting.service';
 import { ConfigService } from '@nestjs/config';
 import { SongEntryDto } from '../song-list/song-list.dto';
 import fetch from 'node-fetch';

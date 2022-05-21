@@ -9,8 +9,8 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { SongMode } from '@prisma/client';
 import { SongEntryDto } from '../../modules/song-list/song-list.dto';
-import { SettingService } from '../../shared/setting.service';
-import { SongModeService } from '../../shared/song-mode.service';
+import { SettingService } from '../prisma/setting.service';
+import { SongModeService } from '../prisma/song-mode.service';
 import { FailureResponse, SuccessResponse } from '../../models/responses';
 
 @Controller('/api')

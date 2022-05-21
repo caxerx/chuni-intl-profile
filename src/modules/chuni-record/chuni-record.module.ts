@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { PrismaService } from '../..//shared/prisma.service';
-import { RecordService } from '../../shared/record.service';
+import { PrismaModule } from '../prisma/prisma.module';
 import { ChuniRecordSubmitController } from './chuni-record-submit.controller';
 import { ChuniRecordController } from './chuni-record.controller';
 
@@ -11,8 +10,8 @@ import { ChuniRecordController } from './chuni-record.controller';
       ttl: 60,
       limit: 150,
     }),
+    PrismaModule,
   ],
   controllers: [ChuniRecordController, ChuniRecordSubmitController],
-  providers: [PrismaService, RecordService],
 })
 export class ChuniRecordModule {}

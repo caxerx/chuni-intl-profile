@@ -9,7 +9,7 @@ import {
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { Prisma } from '@prisma/client';
 import { RecordSubmitDto } from '../../modules/chuni-record/chuni-record-submit.dto';
-import { RecordService } from '../../shared/record.service';
+import { RecordService } from '../prisma/record.service';
 
 @Controller()
 @UseGuards(ThrottlerGuard)

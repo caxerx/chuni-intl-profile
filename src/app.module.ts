@@ -8,6 +8,7 @@ import { ChuniRecordModule } from './modules/chuni-record/chuni-record.module';
 import { ChunirecUpdateModule } from './modules/chunirec-update/chunirec-update.module';
 import { SettingModule } from './modules/setting/setting.module';
 import { SongListModule } from './modules/song-list/song-list.module';
+import { PrismaModule } from './modules/prisma/prisma.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SongListModule } from './modules/song-list/song-list.module';
     }),
     ScheduleModule.forRoot(),
     AuthModule,
+    PrismaModule,
     ChuniRecordModule,
     SongListModule,
     SettingModule,

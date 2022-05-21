@@ -7,7 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
-import { LoginDto } from '../..//modules/auth/auth.dto';
+import { LoginDto } from '../../modules/auth/auth.dto';
 import { AuthService } from './auth.service';
 
 @Controller('/auth')

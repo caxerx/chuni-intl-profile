@@ -6,8 +6,8 @@ import {
   SongImportDto,
   SongUpdateDto,
 } from '../../modules/song-list/song-list.dto';
-import { SongDataService } from '../../shared/song-data.service';
-import { SongModeService } from '../../shared/song-mode.service';
+import { SongDataService } from '../prisma/song-data.service';
+import { SongModeService } from '../prisma/song-mode.service';
 import { compareSongList } from './song-list.util';
 
 @Injectable()
