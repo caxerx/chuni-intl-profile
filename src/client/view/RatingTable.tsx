@@ -6,6 +6,7 @@ import useSWR from 'swr';
 import { useReadLocalStorage } from 'usehooks-ts';
 
 import LoadFailed from '../component/LoadFailed';
+import RecordNotFound from '../component/RecordNotFound';
 import { FailureResponse } from '../model/responses';
 import { formatScore } from '../utils/formatting';
 import {
@@ -15,15 +16,15 @@ import {
 } from '../utils/rating';
 
 interface RatingTableProps {
-  record: ChuniRecordResponse;
-  serverSongData: SongData[];
+  record?: ChuniRecordResponse;
+  serverSongData?: SongData[];
 }
 
 const RatingTable: FC<RatingTableProps> = ({ record, serverSongData }) => {
   const router = useRouter();
   const recordSize = router.query.recordSize
     ? +router.query.recordSize
-    : record.record.length;
+    : record?.record.length ?? 0;
 
   const songList = useReadLocalStorage<string>('songList');
 
@@ -62,6 +63,10 @@ const RatingTable: FC<RatingTableProps> = ({ record, serverSongData }) => {
 
     return [rec, b30, max];
   }, [record, songData]);
+
+  if (!record) {
+    return <RecordNotFound></RecordNotFound>;
+  }
 
   if (songDataError) {
     return <LoadFailed></LoadFailed>;

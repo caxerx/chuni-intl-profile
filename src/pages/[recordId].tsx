@@ -8,8 +8,8 @@ import { GetServerSideProps } from 'next';
 import { SuccessResponse, FailureResponse } from '../client/model/responses';
 
 interface RecordProps {
-  record: ChuniRecordResponse;
-  serverSongData: SongData[];
+  record?: ChuniRecordResponse;
+  serverSongData?: SongData[];
   hideMenu: boolean;
 }
 const Record: FC<RecordProps> = ({
@@ -51,23 +51,37 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const host = process.env.NEXT_PUBLIC_HOST_URL;
 
-  const record: SuccessResponse<ChuniRecordResponse> | FailureResponse<string> =
-    await (await fetch(`${host}/api/record/${recordId}`)).json();
+  try {
+    const record:
+      | SuccessResponse<ChuniRecordResponse>
+      | FailureResponse<string> = await (
+      await fetch(`${host}/api/record/${recordId}`)
+    ).json();
 
-  const serverSongData: SuccessResponse<SongData[]> | FailureResponse<string> =
-    await (await fetch(`${host}/api/song-list`)).json();
+    const serverSongData:
+      | SuccessResponse<SongData[]>
+      | FailureResponse<string> = await (
+      await fetch(`${host}/api/song-list`)
+    ).json();
 
-  if (!record.success || !serverSongData.success) {
-    return { props: {} };
+    if (!record.success || !serverSongData.success) {
+      throw new Error('Request Failed');
+    }
+
+    return {
+      props: {
+        record: record.result,
+        serverSongData: serverSongData.result,
+        hideMenu: hideMenu ?? false,
+      },
+    };
+  } catch {
+    return {
+      props: {
+        hideMenu: hideMenu ?? false,
+      },
+    };
   }
-
-  return {
-    props: {
-      record: record.result,
-      serverSongData: serverSongData.result,
-      hideMenu: hideMenu ?? false,
-    },
-  };
 };
 
 export default Record;

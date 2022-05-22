@@ -43,6 +43,7 @@ export class RecordImageController {
     }
 
     const image = createReadStream(imgPath);
+
     return new StreamableFile(image, { type: 'image/png' });
   }
 }
