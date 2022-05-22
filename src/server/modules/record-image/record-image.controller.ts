@@ -39,7 +39,7 @@ export class RecordImageController {
       const publicUrl = this.config.get('NEXT_PUBLIC_HOST_URL');
 
       const page = await this.browserContext.newPage();
-      page.setViewport({ width: 640, height: 480, deviceScaleFactor: 1 });
+      page.setViewport({ width: 640, height: 480, deviceScaleFactor: 2 });
 
       await page.goto(`${publicUrl}/${recordId}?hideMenu=1&recordSize=30`);
 
