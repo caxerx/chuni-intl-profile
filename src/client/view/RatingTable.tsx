@@ -86,7 +86,7 @@ Max: ${maxAchv}`}
         />
         <meta
           property="twitter:description"
-          content={`Generated an: ${dayjs(record.createdAt).format(
+          content={`Generated at: ${dayjs(record.createdAt).format(
             'DD/MM/YYYY',
           )}
 Best30 Avg: ${b30Avg}
