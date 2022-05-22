@@ -11,10 +11,13 @@ interface RecordProps {
   record?: ChuniRecordResponse;
   serverSongData?: SongData[];
   hideMenu: boolean;
+  host: string;
 }
+
 const Record: FC<RecordProps> = ({
   record,
   serverSongData,
+  host,
   hideMenu = false,
 }) => {
   const router = useRouter();
@@ -34,8 +37,9 @@ const Record: FC<RecordProps> = ({
         <meta
           key="og:image"
           name="og:image"
-          content={`${process.env.NEXT_PUBLIC_HOST_URL}/api/record-image/${recordId}`}
+          content={`${host}/api/record-image/${recordId}`}
         />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       {!hideMenu && <SettingDialog></SettingDialog>}
       <RatingTable
@@ -73,12 +77,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         record: record.result,
         serverSongData: serverSongData.result,
         hideMenu: hideMenu ?? false,
+        host,
       },
     };
   } catch {
     return {
       props: {
         hideMenu: hideMenu ?? false,
+        host,
       },
     };
   }

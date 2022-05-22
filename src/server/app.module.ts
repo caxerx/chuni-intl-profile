@@ -32,7 +32,12 @@ import { RecordImageModule } from './modules/record-image/record-image.module';
       }),
       { viewsDir: null, passthrough404: true },
     ),
-    PuppeteerModule.forRoot({}),
+    PuppeteerModule.forRoot({
+      executablePath:
+        process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD === 'true'
+          ? process.env.CHROMIUM_EXECUTABLE
+          : undefined,
+    }),
   ],
   controllers: [AppController],
 })
