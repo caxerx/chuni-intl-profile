@@ -21,9 +21,9 @@ const Record: FC<RecordProps> = ({
   hideMenu = false,
 }) => {
   const router = useRouter();
-  const recordId = router.query.recordId;
+  const { recordId } = router.query;
 
-  if (!recordId) {
+  if (!recordId || !record) {
     return <RecordNotFound></RecordNotFound>;
   }
 
@@ -34,9 +34,21 @@ const Record: FC<RecordProps> = ({
   return (
     <>
       <Head>
+        <title>Chunithm International Profile</title>
+        <meta property="og:title" content="Chunithm International Profile" />
+        <meta
+          property="twitter:title"
+          content="Chunithm International Profile"
+        />
+
         <meta
           key="og:image"
           name="og:image"
+          content={`${host}/api/record-image/${recordId}`}
+        />
+        <meta
+          key="twitter:image"
+          name="twitter:image"
           content={`${host}/api/record-image/${recordId}`}
         />
         <meta name="twitter:card" content="summary_large_image" />

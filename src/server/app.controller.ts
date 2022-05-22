@@ -29,7 +29,7 @@ export class AppController {
   public index(
     @Param('recordId') recordId: string,
     @Res() res: RenderableResponse,
-    @Query() query,
+    @Query() query: Record<string, string | string[] | undefined>,
   ) {
     res.render(recordId, query);
   }

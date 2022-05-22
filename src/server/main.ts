@@ -8,6 +8,7 @@ import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ChuniRecordSubmitPipe } from './modules/chuni-record/chuni-record-submit.pipe';
+import { RenderService } from 'nest-next';
 
 async function createDevOptions(): Promise<NestApplicationOptions> {
   const devcert = await import('devcert');
@@ -60,6 +61,11 @@ async function setupApp(devOptions?: Promise<NestApplicationOptions>) {
 export async function bootstrap(appPromise: Promise<INestApplication>) {
   const app = await appPromise;
   await app.listen(+(process.env.PORT ?? 3000));
+
+  const renderService = app.get(RenderService);
+  renderService.setErrorHandler(async (err, req, res) => {
+    res.send(err.response);
+  });
 }
 
 if (process.env.MODE == 'DEV') {

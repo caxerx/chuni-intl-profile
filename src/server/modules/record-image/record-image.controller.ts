@@ -7,16 +7,28 @@ import { constants } from 'fs';
 
 import { join } from 'path';
 import { createReadStream } from 'fs';
+import { RecordService } from '../prisma/record.service';
 
 @Controller('/api')
 export class RecordImageController {
   constructor(
     @InjectContext() private readonly browserContext: BrowserContext,
     private config: ConfigService,
+    private record: RecordService,
   ) {}
 
   @Get('/record-image/:recordId')
   async getRecordImage(@Param('recordId') recordId: string) {
+    const record = await this.record.record({
+      id: recordId,
+    });
+
+    if (!record) {
+      const imgPath = join(process.cwd(), `public/record-404.png`);
+      const image = createReadStream(imgPath);
+      return new StreamableFile(image, { type: 'image/png' });
+    }
+
     const imgPath = join(
       process.cwd(),
       `public/record-image-cache/${recordId}.png`,
@@ -43,7 +55,6 @@ export class RecordImageController {
     }
 
     const image = createReadStream(imgPath);
-
     return new StreamableFile(image, { type: 'image/png' });
   }
 }
