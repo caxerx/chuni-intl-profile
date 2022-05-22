@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.table tbody tr:nth-child(-n + 30) th {
+  @apply text-yellow-500;
+}
+
+.difficulty-title[data-difficulty="BAS"] {
+  @apply text-green-500;
+}
+
+.difficulty-title[data-difficulty="ADV"] {
+  @apply text-yellow-600;
+}
+
+.difficulty-title[data-difficulty="EXP"] {
+  @apply text-red-500;
+}
+
+.difficulty-title[data-difficulty="MAS"] {
+  @apply text-purple-500;
+}
+
+.difficulty-title[data-difficulty="ULT"] {
+  @apply text-gray-200;
+}

@@ -11,7 +11,10 @@ import { SongMode } from '@prisma/client';
 import { SongEntryDto } from '../../modules/song-list/song-list.dto';
 import { SettingService } from '../prisma/setting.service';
 import { SongModeService } from '../prisma/song-mode.service';
-import { FailureResponse, SuccessResponse } from '../../models/responses';
+import {
+  FailureResponse,
+  SuccessResponse,
+} from '../../../shared/models/responses';
 
 @Controller('/api')
 @UseGuards(ThrottlerGuard)

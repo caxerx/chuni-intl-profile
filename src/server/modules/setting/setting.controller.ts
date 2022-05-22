@@ -15,7 +15,10 @@ import {
   UpdateSettingDto,
 } from '../..//modules/setting/setting.dto';
 import { SettingService } from '../prisma/setting.service';
-import { FailureResponse, SuccessResponse } from '../../models/responses';
+import {
+  FailureResponse,
+  SuccessResponse,
+} from '../../../shared/models/responses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @UseGuards(JwtAuthGuard)
