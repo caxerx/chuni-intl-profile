@@ -163,4 +163,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-/public
+public/record-image-cache

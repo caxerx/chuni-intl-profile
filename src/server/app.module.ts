@@ -10,6 +10,8 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { RenderModule } from 'nest-next';
 import Next from 'next';
 import { AppController } from './app.controller';
+import { PuppeteerModule } from 'nest-puppeteer';
+import { RecordImageModule } from './modules/record-image/record-image.module';
 
 @Module({
   imports: [
@@ -23,12 +25,14 @@ import { AppController } from './app.controller';
     SongListModule,
     SettingModule,
     ChunirecUpdateModule,
+    RecordImageModule,
     RenderModule.forRootAsync(
       Next({
         dev: process.env.MODE === 'DEV',
       }),
-      { viewsDir: null },
+      { viewsDir: null, passthrough404: true },
     ),
+    PuppeteerModule.forRoot({}),
   ],
   controllers: [AppController],
 })
